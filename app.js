@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var candidateRouter = require('./routes/candidateRoutes');
@@ -11,6 +11,7 @@ var candidateRouter = require('./routes/candidateRoutes');
 var app = express();
 
 const db = require('./config/db')();
+app.use(bodyParser.json())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
