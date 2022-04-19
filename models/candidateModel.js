@@ -10,6 +10,7 @@ const candidateSchema = new Schema({
   website: { type: String },
   avatar: { type: String },
   address: { type: String },
+  data:{type:String},
   created_at: { type: Date, default: Date.now },
 });
 
