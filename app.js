@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var candidateRouter = require('./routes/candidateRoutes');
@@ -24,16 +24,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/',indexRouter);
-app.use('/candidates', candidateRouter);
-
-app.use((req, res, next) => {
-  res.setheaders('Access-Control-Allow-Origin', '*');
-  res.setheaders('Access-Control-Allow-Headers', '*');
-  next();
+// app.use('/',indexRouter);
+app.use(cors());
+app.use('/candidates', candidateRouter,function (req, res, next) {
+    res.json({msg: 'This is CORS-enabled for all origins!'})
   });
 
-
-
 app.listen(process.env.PORT || 3000 , () => console.log(`Example app listening on port ${process.env.PORT || 3000}!`))
-
